@@ -10,16 +10,16 @@ public class FileProcessingSystem {
 		return database;
 	}
 
-	public File openFileForNewGoldMember(GoldMember goldMember) {
+	public int openFileForNewGoldMember(GoldMember goldMember) {
 		File file = new File();
 		goldMember.serializeDetailsToFile(file);
 		addFileToGoldMembersFilesCategory(file);
 
-		return file;
+		return file.getId();
 	}
 
-	public Card createCardForNewGoldMember(GoldMember goldMember, File file) {
-		Card card = new Card(file.getId());
+	public Card createCardForNewGoldMember(GoldMember goldMember, int fileId) {
+		Card card = new Card(fileId);
 		goldMember.serializeDetailsToCard(card);
 
 		return card;
@@ -29,16 +29,16 @@ public class FileProcessingSystem {
 		database.getGoldMembersFilesCategory().addFile(file);
 	}
 
-	public File openFileForNewSilverMember(SilverMember silverMember) {
+	public int openFileForNewSilverMember(SilverMember silverMember) {
 		File file = new File();
 		silverMember.serializeDetailsToFile(file);
 		addFileToSilverMembersFilesCategory(file);
 
-		return file;
+		return file.getId();
 	}
 
-	public Card createCardForNewSilverMember(SilverMember silverMember, File file) {
-		Card card = new Card(file.getId());
+	public Card createCardForNewSilverMember(SilverMember silverMember, int fileId) {
+		Card card = new Card(fileId);
 		silverMember.serializeDetailsToCard(card);
 
 		return card;
@@ -48,16 +48,16 @@ public class FileProcessingSystem {
 		database.getSilverMembersFilesCategory().addFile(file);
 	}
 
-	public File openFileForNewPlatinumMember(PlatinumMember platinumMember) {
+	public int openFileForNewPlatinumMember(PlatinumMember platinumMember) {
 		File file = new File();
 		platinumMember.serializeDetailsToFile(file);
 		addFileToPlatinumMembersFilesCategory(file);
 
-		return file;
+		return file.getId();
 	}
 
-	public Card createCardForNewPlatinumMember(PlatinumMember platinumMember, File file) {
-		Card card = new Card(file.getId());
+	public Card createCardForNewPlatinumMember(PlatinumMember platinumMember, int fileId) {
+		Card card = new Card(fileId);
 		platinumMember.serializeDetailsToCard(card);
 
 		return card;

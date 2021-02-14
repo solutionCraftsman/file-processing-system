@@ -29,9 +29,12 @@ class FileProcessingSystemTest {
                 "Ayo", "Dele", "Glow", "ayodele@glow.com", Gender.MALE, 2021, 1, 1
         );
 
-        File file = system.openFileForNewGoldMember(goldMember);
-        assertNotNull(file);
-        assertEquals(file, system.getDatabase().getGoldMembersFilesCategory().getFileById(file.getId()));
+        int fileId = system.openFileForNewGoldMember(goldMember);
+        File openedFile = system.getDatabase().getGoldMembersFilesCategory().getFileById(fileId);
+
+        assertNotNull(openedFile);
+        assertEquals(MemberCategory.GOLD, openedFile.getMemberCategory());
+        assertEquals(goldMember, openedFile.getMemberDetails());
     }
 
     @Test
@@ -40,9 +43,12 @@ class FileProcessingSystemTest {
                 "Ayo", "Dele", "Glow", "ayodele@glow.com", Gender.MALE, 2021, 1, 1
         );
 
-        File file = system.openFileForNewSilverMember(silverMember);
-        assertNotNull(file);
-        assertEquals(file, system.getDatabase().getSilverMembersFilesCategory().getFileById(file.getId()));
+        int fileId = system.openFileForNewSilverMember(silverMember);
+        File openedFile = system.getDatabase().getSilverMembersFilesCategory().getFileById(fileId);
+
+        assertNotNull(openedFile);
+        assertEquals(MemberCategory.SILVER, openedFile.getMemberCategory());
+        assertEquals(silverMember, openedFile.getMemberDetails());
     }
 
     @Test
@@ -51,9 +57,12 @@ class FileProcessingSystemTest {
                 "Ayo", "Dele", "Glow", "ayodele@glow.com", Gender.MALE, 2021, 1, 1
         );
 
-        File file = system.openFileForNewPlatinumMember(platinumMember);
-        assertNotNull(file);
-        assertEquals(file, system.getDatabase().getPlatinumMembersFilesCategory().getFileById(file.getId()));
+        int fileId = system.openFileForNewPlatinumMember(platinumMember);
+        File openedFile = system.getDatabase().getPlatinumMembersFilesCategory().getFileById(fileId);
+
+        assertNotNull(openedFile);
+        assertEquals(MemberCategory.PLATINUM, openedFile.getMemberCategory());
+        assertEquals(platinumMember, openedFile.getMemberDetails());
     }
 
     @Test
@@ -63,8 +72,12 @@ class FileProcessingSystemTest {
         );
 
         File file = new File();
-        Card card = system.createCardForNewGoldMember(goldMember, file);
+        Card card = system.createCardForNewGoldMember(goldMember, file.getId());
+
         assertNotNull(card);
+        assertEquals(file.getId(), card.getMemberId());
+        assertEquals(MemberCategory.GOLD, card.getMemberCategory());
+        assertEquals(goldMember, card.getMemberDetails());
     }
 
     @Test
@@ -74,8 +87,12 @@ class FileProcessingSystemTest {
         );
 
         File file = new File();
-        Card card = system.createCardForNewSilverMember(silverMember, file);
+        Card card = system.createCardForNewSilverMember(silverMember, file.getId());
+
         assertNotNull(card);
+        assertEquals(file.getId(), card.getMemberId());
+        assertEquals(MemberCategory.SILVER, card.getMemberCategory());
+        assertEquals(silverMember, card.getMemberDetails());
     }
 
     @Test
@@ -85,7 +102,11 @@ class FileProcessingSystemTest {
         );
 
         File file = new File();
-        Card card = system.createCardForNewPlatinumMember(platinumMember, file);
+        Card card = system.createCardForNewPlatinumMember(platinumMember, file.getId());
+
         assertNotNull(card);
+        assertEquals(file.getId(), card.getMemberId());
+        assertEquals(MemberCategory.PLATINUM, card.getMemberCategory());
+        assertEquals(platinumMember, card.getMemberDetails());
     }
 }
